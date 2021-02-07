@@ -22,18 +22,17 @@
         <v-btn text> Cancel </v-btn>
       </v-stepper-content>
       <v-stepper-content step="2">
-        teste 2
         <v-btn color="primary" @click="e1 = 3"> Próximo </v-btn>
 
         <v-btn text @click="e1 = 1"> Retornar </v-btn>
       </v-stepper-content>
       <v-stepper-content step="3">
-        teste 3
+        <Perfil />
         <v-btn color="primary" @click="e1 = 4"> Próximo </v-btn>
         <v-btn text @click="e1 = 2"> Retornar </v-btn>
       </v-stepper-content>
-      <v-stepper-content step="4"> teste 4 
-
+      <v-stepper-content step="4">
+        teste 4
         <v-btn color="primary" @click="alert('Concluido')"> Concluir </v-btn>
         <v-btn text @click="e1 = 3"> Retornar </v-btn>
       </v-stepper-content>
@@ -43,9 +42,10 @@
 
 <script>
 import Agendamentos from "@/components/Agendamentos";
+import Perfil from "@/components/Perfil";
 export default {
   name: "Tabs",
-  components: { Agendamentos },
+  components: { Agendamentos, Perfil },
   data() {
     return {
       e1: 1,
@@ -69,7 +69,7 @@ export default {
           status: "Pagamento nao realizado",
         },
         {
-          id: 1,
+          id: 3,
           nome: "Teste de HIV",
           dia: "28/01/12",
           hora: "13:00",
