@@ -2,20 +2,20 @@
   <v-main>
     <v-row>
       <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field v-model="perfil.nome" label="Nome"></v-text-field>
+        <v-text-field v-model="perfil.nome" label="Nome*" required></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field v-model="perfil.sexo" label="Sexo"></v-text-field>
+        <v-text-field v-model="perfil.sexo" label="Sexo*"></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
         <v-text-field
           cols="12"
           v-model="perfil.dtNascimento"
-          label="Data de Nascimento"
+          label="Data de Nascimento*"
         ></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field readonly :value="perfil.cpf | CPF " label="CPF"></v-text-field>
+        <v-text-field readonly :value="perfil.cpf | CPF " label="CPF*"></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
         <v-text-field v-model="perfil.mae" label="Nome da Mãe"></v-text-field>
@@ -30,17 +30,11 @@
           append-icon="mdi-magnify"
           v-model="perfil.endereco.cep"
           label="Digite o CEP"
-          :loading="loadind"
+          :loading="loading"
           @click:append="buscaEndereco(perfil.endereco.cep)"
         ></v-text-field>
       </v-col>
-      <v-col cols="12" lg="2" md="8" sm="12">
-        <v-text-field
-          v-model="perfil.endereco.tipoLogradouro"
-          label="Tipo"
-        ></v-text-field>
-      </v-col>
-      <v-col cols="12" lg="4" md="8" sm="12">
+      <v-col cols="12" lg="1" md="4" sm="12">
         <v-text-field v-model="perfil.endereco.uf" label="UF"></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
@@ -61,7 +55,7 @@
           label="Cidade"
         ></v-text-field>
       </v-col>
-      <v-col cols="12" lg="2" md="8" sm="12">
+      <v-col cols="12" lg="1" md="8" sm="12">
         <v-text-field
           v-model="perfil.endereco.numero"
           label="Numero"

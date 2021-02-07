@@ -13,9 +13,9 @@ export default new Vuex.Store({
             nome: "Gabriel Moreno da Luz",
             sexo: "Masculino",
             dtNascimento: "24/05/1995",
-            cpf: "03647780081",
-            mae: "Marcia Moreno da Luz",
-            pai: "Rubens Souza da Luz",
+            cpf: "99999999999",
+            mae: "Nome da mae teste",
+            pai: "Nome do Pai teste",
             endereco: {}
         },
     },
