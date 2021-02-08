@@ -16,7 +16,14 @@ export default new Vuex.Store({
             cpf: "99999999999",
             mae: "Nome da mae teste",
             pai: "Nome do Pai teste",
-            endereco: {}
+            endereco: {
+                bairro: '',
+                cep: '',
+                cidade: '',
+                complemento: '',
+                end: '',
+                uf: '',
+            }
         },
     },
     getters: {
@@ -30,15 +37,24 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        buscaPorCEP({ commit }, payload) {
-            (async() => {
-                try {
-                    const response = await $http.get(`/correios/consultaCEP/${payload}`)
-                    commit('alteraEndereco', response.data.return)
-                } catch (e) {
-                    console.log(e)
+        async buscaPorCEP({ commit }, payload) {
+            try {
+                const response = await $http.get(`/correios/consultaCEP/${payload}`)
+                if (!response.data) {
+                    return commit('alteraEndereco', {
+                        err: 'CEP inválido',
+                        bairro: '',
+                        cep: '',
+                        cidade: '',
+                        complemento: '',
+                        end: '',
+                        uf: '',
+                    })
                 }
-            })()
+                commit('alteraEndereco', response.data.return)
+            } catch (e) {
+                console.log(e)
+            }
         }
     },
 })
