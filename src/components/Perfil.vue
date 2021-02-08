@@ -2,7 +2,11 @@
   <v-main>
     <v-row>
       <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field v-model="perfil.nome" label="Nome*" required></v-text-field>
+        <v-text-field
+          v-model="perfil.nome"
+          label="Nome*"
+          required
+        ></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
         <v-text-field v-model="perfil.sexo" label="Sexo*"></v-text-field>
@@ -15,7 +19,11 @@
         ></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field readonly :value="perfil.cpf | CPF " label="CPF*"></v-text-field>
+        <v-text-field
+          readonly
+          :value="perfil.cpf | CPF"
+          label="CPF*"
+        ></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
         <v-text-field v-model="perfil.mae" label="Nome da Mãe"></v-text-field>
@@ -30,7 +38,6 @@
           append-icon="mdi-magnify"
           v-model="perfil.endereco.cep"
           label="Digite o CEP"
-          :loading="loading"
           @click:append="buscaEndereco(perfil.endereco.cep)"
         ></v-text-field>
       </v-col>
@@ -61,7 +68,7 @@
           label="Numero"
         ></v-text-field>
       </v-col>
-         <v-col cols="12" lg="4" md="8" sm="12">
+      <v-col cols="12" lg="4" md="8" sm="12">
         <v-text-field
           v-model="perfil.endereco.complemento"
           label="Complemento"
@@ -69,6 +76,12 @@
         ></v-text-field>
       </v-col>
     </v-row>
+    <v-alert border="right" type="error" :value="alert"
+      >O CEP informado é inválido</v-alert
+    >
+    <v-overlay :value="loading">
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+    </v-overlay>
   </v-main>
 </template>
 
@@ -86,6 +99,13 @@ export default {
     perfil() {
       return this.buscaDadosPaciente;
     },
+    alert() {
+      if (this.buscaDadosPaciente.endereco.err) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   methods: {
     ...mapActions(["buscaPorCEP"]),
@@ -95,10 +115,10 @@ export default {
       this.loading = false;
     },
   },
-  filters:{
-    CPF(cpf){
-      return cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-    }
-  }
+  filters: {
+    CPF(cpf) {
+      return cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    },
+  },
 };
 </script>
