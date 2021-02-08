@@ -8,7 +8,7 @@
           required
         ></v-text-field>
       </v-col>
-      <v-col cols="12" lg="4" md="8" sm="12">
+      <v-col cols="12" lg="2" md="8" sm="12">
         <v-text-field v-model="perfil.sexo" label="Sexo*"></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
@@ -18,17 +18,17 @@
           label="Data de Nascimento*"
         ></v-text-field>
       </v-col>
-      <v-col cols="12" lg="4" md="8" sm="12">
+      <v-col cols="12" lg="2" md="8" sm="12">
         <v-text-field
           readonly
           :value="perfil.cpf | CPF"
           label="CPF*"
         ></v-text-field>
       </v-col>
-      <v-col cols="12" lg="4" md="8" sm="12">
+      <v-col cols="12" lg="5" md="8" sm="12">
         <v-text-field v-model="perfil.mae" label="Nome da Mãe"></v-text-field>
       </v-col>
-      <v-col cols="12" lg="4" md="8" sm="12">
+      <v-col cols="12" lg="5" md="8" sm="12">
         <v-text-field v-model="perfil.pai" label="Nome do Pai"></v-text-field>
       </v-col>
     </v-row>
@@ -38,19 +38,14 @@
           append-icon="mdi-magnify"
           v-model="perfil.endereco.cep"
           label="Digite o CEP"
+          :loading="loading"
           @click:append="buscaEndereco(perfil.endereco.cep)"
         ></v-text-field>
       </v-col>
       <v-col cols="12" lg="1" md="4" sm="12">
         <v-text-field v-model="perfil.endereco.uf" label="UF"></v-text-field>
       </v-col>
-      <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field
-          v-model="perfil.endereco.end"
-          label="Logradouro"
-        ></v-text-field>
-      </v-col>
-      <v-col cols="12" lg="4" md="8" sm="12">
+      <v-col cols="12" lg="2" md="8" sm="12">
         <v-text-field
           v-model="perfil.endereco.bairro"
           label="Bairro"
@@ -62,13 +57,19 @@
           label="Cidade"
         ></v-text-field>
       </v-col>
+      <v-col cols="12" lg="4" md="8" sm="12">
+        <v-text-field
+          v-model="perfil.endereco.end"
+          label="Logradouro"
+        ></v-text-field>
+      </v-col>
       <v-col cols="12" lg="1" md="8" sm="12">
         <v-text-field
           v-model="perfil.endereco.numero"
           label="Numero"
         ></v-text-field>
       </v-col>
-      <v-col cols="12" lg="4" md="8" sm="12">
+      <v-col cols="12" lg="6" md="8" sm="12">
         <v-text-field
           v-model="perfil.endereco.complemento"
           label="Complemento"
@@ -80,7 +81,10 @@
       >O CEP informado é inválido</v-alert
     >
     <v-overlay :value="loading">
-      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+      <v-progress-circular
+        indeterminat1231e
+        color="primary"
+      ></v-progress-circular>
     </v-overlay>
   </v-main>
 </template>
@@ -109,9 +113,9 @@ export default {
   },
   methods: {
     ...mapActions(["buscaPorCEP"]),
-    buscaEndereco(cep) {
+    async buscaEndereco(cep) {
       this.loading = true;
-      this.buscaPorCEP(cep);
+      await this.buscaPorCEP(cep);
       this.loading = false;
     },
   },

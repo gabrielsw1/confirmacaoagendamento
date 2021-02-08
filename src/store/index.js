@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-const $http = axios.create({ baseURL: 'http://127.0.0.1:5000' })
+const $http = axios.create({ baseURL: 'http://127.0.0.1:8989' })
 
 Vue.use(Vuex)
 
@@ -23,7 +23,8 @@ export default new Vuex.Store({
                 complemento: '',
                 end: '',
                 uf: '',
-            }
+            },
+            agendamentos: []
         },
     },
     getters: {
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     mutations: {
         alteraEndereco(state, payload) {
             state.paciente.endereco = payload
+        },
+        alteraAgendamentos(state, payload) {
+            state.paciente.agendamentos.push(payload)
         }
     },
     actions: {
@@ -54,6 +58,14 @@ export default new Vuex.Store({
                 commit('alteraEndereco', response.data.return)
             } catch (e) {
                 console.log(e)
+            }
+        },
+        async buscaAgendamentos({ commit }) {
+            try {
+                const response = await $http.get(`/agendamentos/consultaAgendamentos`)
+                commit('alteraAgendamentos', response.data)
+            } catch (error) {
+                console.log(error)
             }
         }
     },

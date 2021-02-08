@@ -7,6 +7,11 @@
           ><b>Hospidata</b> - Confirmação de Agendamentos</span
         >
       </v-app-bar-title>
+      <v-spacer></v-spacer>
+      <v-btn plain>Institucional</v-btn>
+      <v-btn plain>Agendamentos</v-btn>
+      <v-btn icon color="primary"> <v-icon>mdi-account-circle</v-icon> </v-btn>
+        
     </v-app-bar>
 
     <v-container>
