@@ -27,7 +27,7 @@
         <v-btn text @click="e1 = 1"> Retornar </v-btn>
       </v-stepper-content>
       <v-stepper-content step="3">
-        <Perfil />
+        <DadosPessoais />
         <v-btn color="primary" @click="e1 = 4"> Próximo </v-btn>
         <v-btn text @click="e1 = 2"> Retornar </v-btn>
       </v-stepper-content>
@@ -42,10 +42,10 @@
 
 <script>
 import Agendamentos from "@/components/Agendamentos";
-import Perfil from "@/components/Perfil";
+import DadosPessoais from "@/components/DadosPessoais";
 export default {
   name: "Tabs",
-  components: { Agendamentos, Perfil },
+  components: { Agendamentos, DadosPessoais },
   data() {
     return {
       e1: 1,
