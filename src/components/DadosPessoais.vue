@@ -76,7 +76,11 @@
         ></v-text-field>
       </v-col>
     </v-row>
-    <v-alert border="right" type="error" :value="alert" max-width="4                                                      0%"
+    <v-alert
+      border="right"
+      type="error"
+      :value="alert"
+      max-width="40%"
       >Nao foi possivel encontrar o CEP informado</v-alert
     >
     <v-overlay :value="loading">
@@ -109,9 +113,9 @@ export default {
   },
   methods: {
     ...mapActions(["buscaPorCEP"]),
-    buscaEndereco(cep) {
+    async buscaEndereco(cep) {
       this.loading = true;
-      this.buscaPorCEP(cep);
+      await this.buscaPorCEP(cep);
       this.loading = false;
     },
   },
