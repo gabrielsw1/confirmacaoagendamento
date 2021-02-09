@@ -30,6 +30,9 @@ export default new Vuex.Store({
     getters: {
         buscaDadosPaciente(state) {
             return state.paciente
+        },
+        buscaDadosAgendamento(state){
+            return state.paciente.agendamentos
         }
     },
     mutations: {

@@ -17,7 +17,15 @@
     </v-stepper-header>
     <v-stepper-items>
       <v-stepper-content step="1">
-        <Agendamentos :agendamentos="agendamentosPendentes" />
+        <v-overlay :absolute="true" :value="loading">
+          <v-progress-circular
+            indeterminate
+            color="primary"
+          ></v-progress-circular>
+        </v-overlay>
+
+        <Agendamentos />
+        <!--:agendamentos="agendamentosPendentes"-->
         <v-btn color="primary" @click="e1 = 2"> Próximo </v-btn>
         <v-btn text> Cancel </v-btn>
       </v-stepper-content>
@@ -43,42 +51,29 @@
 <script>
 import Agendamentos from "@/components/Agendamentos";
 import DadosPessoais from "@/components/DadosPessoais";
+import { mapGetters } from "vuex";
 export default {
   name: "Tabs",
   components: { Agendamentos, DadosPessoais },
+  mounted() {
+    this.$store.dispatch("buscaAgendamentos");
+  },
   data() {
     return {
       e1: 1,
-      agendamentosPendentes: [
-        {
-          id: 1,
-          nome: "Teste de HIV",
-          dia: "28/01/12",
-          hora: "13:00",
-          medico: "Medico Teste",
-          endereco: "Rua Teste, 123",
-          status: "Pagamento nao realizado",
-        },
-        {
-          id: 2,
-          nome: "Teste de COVID",
-          dia: "28/01/12",
-          hora: "13:00",
-          medico: "Medico Teste",
-          endereco: "Rua Teste, 123",
-          status: "Pagamento nao realizado",
-        },
-        {
-          id: 3,
-          nome: "Teste de HIV",
-          dia: "28/01/12",
-          hora: "13:00",
-          medico: "Medico Teste",
-          endereco: "Rua Teste, 123",
-          status: "Pagamento nao realizado",
-        },
-      ],
+      loading: true,
     };
+  },
+  watch:{
+    agendamentos(){
+      this.loading = false
+    }
+  },
+  computed: {
+    ...mapGetters(["buscaDadosAgendamento"]),
+    agendamentos() {
+      return this.buscaDadosAgendamento;
+    },
   },
 };
 </script>

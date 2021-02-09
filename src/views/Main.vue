@@ -9,8 +9,12 @@
       </v-app-bar-title>
       <v-spacer></v-spacer>
       <v-btn plain to="posts" active-class="active-class">Posts</v-btn>
-      <v-btn plain to="institucional" active-class="active-class">Institucional</v-btn>
-      <v-btn plain to="agendamentos" active-class="active-class">Agendamentos</v-btn>
+      <v-btn plain to="institucional" active-class="active-class"
+        >Institucional</v-btn
+      >
+      <v-btn plain to="agendamentos" active-class="active-class"
+        >Agendamentos</v-btn
+      >
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon color="primary" v-bind="attrs" v-on="on">
@@ -18,8 +22,12 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item  :to="item.to" v-for="(item, index) in items" :key="index">
-            <v-list-item-title >{{ item.title }}</v-list-item-title>
+          <v-list-item
+            :to="item.to"
+            v-for="(item, index) in items"
+            :key="index"
+          >
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -34,18 +42,14 @@
 </template>
 
 <script>
-//import Stepper from "@/components/Steper";
 export default {
   name: "Main",
-  components: {
-    //Stepper,
-  },
   data() {
     return {
       items: [
-        { title: "Perfil", to:'/perfil'},
-        { title: "Historicos", to:'/historico' },
-        { title: "Pagamentos", to:'/pagamentos'},
+        { title: "Perfil", to: "/perfil" },
+        { title: "Historicos", to: "/historico" },
+        { title: "Pagamentos", to: "/pagamentos" },
         { title: "Sair" },
       ],
     };
@@ -54,7 +58,7 @@ export default {
 </script>
 
 <style scoped>
-.active-class{
+.active-class {
   text-decoration: underline 3px;
   text-decoration-color: #1976d2;
 }
