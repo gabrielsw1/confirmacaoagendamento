@@ -12,25 +12,29 @@
         <v-toolbar dark dense flat color="primary" class="ma-0 pa-0">
           
           <span class="font-weight-bold">Item Agendamento:</span>
-          {{ item.nome }}
+          {{ item.descrProcedimento }}
         </v-toolbar>
         <v-card-text>
           <v-row>
             <v-col lg="6" md="8" sm="12" class="ma-0 pa-1">
               <span class="font-weight-bold"> Data: </span
-              >{{ item.dia || "Nao Informada" }}
+              >{{ item.dtAgendamento || "Não Informada" }}
             </v-col>
             <v-col lg="6" md="8" sm="12" class="ma-0 pa-1">
               <span class="font-weight-bold"> Hora: </span
-              >{{ item.hora || "Nao Informada" }}
+              >{{ item.hrAgendamento || "Não Informada" }}
             </v-col>
             <v-col lg="12" md="12" sm="12" class="ma-0 pa-1">
               <span class="font-weight-bold"> Medico: </span
-              >{{ item.medico || "Nao Informado" }}
+              >{{ item.nmPrestador || "Não Informado" }}
+            </v-col>
+            <v-col lg="12" md="12" sm="12" class="ma-0 pa-1">
+              <span class="font-weight-bold"> Instituição: </span
+              >{{ item.nomeHospital || "Não Informado" }}
             </v-col>
             <v-col lg="12" md="12" sm="12" class="ma-0 pa-1">
               <span class="font-weight-bold"> Endereco: </span
-              >{{ item.endereco || "Nao Informado" }}
+              >{{ item.logradouro || "Não Informado" }}
             </v-col>
           </v-row>
         </v-card-text>

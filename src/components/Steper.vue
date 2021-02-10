@@ -24,8 +24,8 @@
           ></v-progress-circular>
         </v-overlay>
 
-        <Agendamentos />
-        <!--:agendamentos="agendamentosPendentes"-->
+        <Agendamentos :agendamentos="agendamentos"/>
+        
         <v-btn color="primary" @click="e1 = 2"> Próximo </v-btn>
         <v-btn text> Cancel </v-btn>
       </v-stepper-content>

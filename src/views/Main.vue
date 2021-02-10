@@ -12,14 +12,17 @@
       <v-btn plain to="institucional" active-class="active-class"
         >Institucional</v-btn
       >
-      <v-btn plain to="agendamentos" active-class="active-class"
-        >Agendamentos</v-btn
-      >
+      <v-badge bordered color="error" overlap :content="countAgendamentos" class="mr-4 mt-0">
+        <v-btn plain to="agendamentos" active-class="active-class"
+          >Agendamentos</v-btn
+        >
+      </v-badge>
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon color="primary" v-bind="attrs" v-on="on">
             <v-icon>mdi-account-circle</v-icon>
           </v-btn>
+          <v-divider vertical/>
         </template>
         <v-list>
           <v-list-item
@@ -27,7 +30,7 @@
             v-for="(item, index) in items"
             :key="index"
           >
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title v-e>{{ item.title }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -54,6 +57,11 @@ export default {
       ],
     };
   },
+  computed:{
+    countAgendamentos(){
+      return this.$store.state.paciente.agendamentos.length
+    }
+  }
 };
 </script>
 
