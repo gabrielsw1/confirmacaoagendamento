@@ -8,6 +8,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        agendamentosSelecionados:[],
         paciente: {
             id: 1,
             nome: "Gabriel Moreno da Luz",
@@ -33,7 +34,7 @@ export default new Vuex.Store({
         },
         buscaDadosAgendamento(state){
             return state.paciente.agendamentos
-        }
+        },
     },
     mutations: {
         alteraEndereco(state, payload) {

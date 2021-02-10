@@ -30,6 +30,7 @@
         <v-btn text> Cancel </v-btn>
       </v-stepper-content>
       <v-stepper-content step="2">
+        <DadosAgendamentos/>
         <v-btn color="primary" @click="e1 = 3"> Próximo </v-btn>
 
         <v-btn text @click="e1 = 1"> Retornar </v-btn>
@@ -51,10 +52,11 @@
 <script>
 import Agendamentos from "@/components/Agendamentos";
 import DadosPessoais from "@/components/DadosPessoais";
+import DadosAgendamentos from "@/components/DadosAgendamentos";
 import { mapGetters } from "vuex";
 export default {
   name: "Tabs",
-  components: { Agendamentos, DadosPessoais },
+  components: { Agendamentos, DadosPessoais, DadosAgendamentos },
   mounted() {
     this.$store.dispatch("buscaAgendamentos");
   },

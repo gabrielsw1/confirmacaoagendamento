@@ -1,18 +1,22 @@
 <template>
   <v-row>
     <v-col
-      v-for="item in agendamentos"
-      :key="item.id"
+      v-for="(item, id) in agendamentos"
+      :key="id"
       xl="2"
       lg="4"
       md="6"
       sm="12"
     >
       <v-card elevation="6" class="mb-3">
-        <v-toolbar dark dense flat color="primary" class="ma-0 pa-0">
-          
-          <span class="font-weight-bold">Item Agendamento:</span>
-          {{ item.descrProcedimento }}
+        <v-toolbar dark dense flat color="primary" height="30%">
+          <v-checkbox
+            :key="item.idAgendamento"
+            :value="item"
+            v-model="selected"
+            class="mt-5"
+          ></v-checkbox>
+          {{ item.descrProcedimento }} {{ item.idAgendamento }}
         </v-toolbar>
         <v-card-text>
           <v-row>
@@ -25,7 +29,7 @@
               >{{ item.hrAgendamento || "Não Informada" }}
             </v-col>
             <v-col lg="12" md="12" sm="12" class="ma-0 pa-1">
-              <span class="font-weight-bold"> Medico: </span
+              <span class="font-weight-bold"> Médico: </span
               >{{ item.nmPrestador || "Não Informado" }}
             </v-col>
             <v-col lg="12" md="12" sm="12" class="ma-0 pa-1">
@@ -33,7 +37,7 @@
               >{{ item.nomeHospital || "Não Informado" }}
             </v-col>
             <v-col lg="12" md="12" sm="12" class="ma-0 pa-1">
-              <span class="font-weight-bold"> Endereco: </span
+              <span class="font-weight-bold"> Endereço: </span
               >{{ item.logradouro || "Não Informado" }}
             </v-col>
           </v-row>
@@ -48,7 +52,14 @@ export default {
   name: "Agendamentos",
   props: ["agendamentos"],
   data() {
-    return {};
+    return {
+      selected: [],
+    };
+  },
+  watch: {
+    selected(newValue) {
+      this.$store.agendamentosSelecionados = newValue;
+    },
   },
 };
 </script>
