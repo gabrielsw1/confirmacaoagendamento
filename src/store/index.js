@@ -2,13 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-const $http = axios.create({ baseURL: 'http://192.168.232.113:8989' })
+const $http = axios.create({ baseURL: 'http://127.0.0.1:8989' })
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        agendamentosSelecionados:[],
+        agendamentosSelecionados: [],
         paciente: {
             id: 1,
             nome: "Gabriel Moreno da Luz",
@@ -32,9 +32,20 @@ export default new Vuex.Store({
         buscaDadosPaciente(state) {
             return state.paciente
         },
-        buscaDadosAgendamento(state){
+        buscaDadosAgendamento(state) {
             return state.paciente.agendamentos
         },
+        buscaAgendamentosSelecionados(state) {
+            return state.agendamentosSelecionados
+        },
+        buscaAgendamentosById: (state) => (Array) => {
+            let resultado = []
+            for (let value of Array) {
+                const filter = state.paciente.agendamentos.filter(a => a.idAgendamento === value)
+                resultado.push(...filter)
+            }
+            return resultado
+        }
     },
     mutations: {
         alteraEndereco(state, payload) {
@@ -42,6 +53,9 @@ export default new Vuex.Store({
         },
         alteraAgendamentos(state, payload) {
             state.paciente.agendamentos = payload
+        },
+        agendamentosSelecionados(state, payload) {
+            state.agendamentosSelecionados = payload
         }
     },
     actions: {
