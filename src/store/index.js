@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-const $http = axios.create({ baseURL: 'http://127.0.0.1:8989' })
+const $http = axios.create({ baseURL: 'http://192.168.232.113:8989' })
 
 Vue.use(Vuex)
 

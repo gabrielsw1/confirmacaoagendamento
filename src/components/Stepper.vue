@@ -26,30 +26,49 @@
 
         <Agendamentos :agendamentos="agendamentos" />
 
-        <v-btn
-          color="primary"
-          @click="e1 = 2"
-          :disabled="buscaAgendamentosSelecionados.length == 0 ? true : false"
-        >
-          Próximo
-        </v-btn>
-        <v-btn text> Cancel </v-btn>
+        <v-row>
+          <v-col class="d-flex justify-end">
+            <v-btn text> Cancel </v-btn>
+            <v-btn
+              color="primary"
+              @click="e1 = 2"
+              :disabled="
+                buscaAgendamentosSelecionados.length == 0 ? true : false
+              "
+            >
+              Próximo
+            </v-btn>
+          </v-col>
+        </v-row>
       </v-stepper-content>
       <v-stepper-content step="2">
         <ConfirmacaoAgendamento />
-        <v-btn color="primary" @click="e1 = 3"> Próximo </v-btn>
-
-        <v-btn text @click="e1 = 1"> Retornar </v-btn>
+        <v-row>
+          <v-col class="d-flex justify-end">
+            <v-btn text @click="e1 = 1"> Retornar </v-btn>
+            <v-btn color="primary" @click="e1 = 3"> Próximo </v-btn>
+          </v-col>
+        </v-row>
       </v-stepper-content>
       <v-stepper-content step="3">
         <DadosPessoais />
-        <v-btn color="primary" @click="e1 = 4"> Próximo </v-btn>
-        <v-btn text @click="e1 = 2"> Retornar </v-btn>
+        <v-row>
+          <v-col class="d-flex justify-end">
+            <v-btn text @click="e1 = 2"> Retornar </v-btn>
+            <v-btn color="primary" @click="e1 = 4"> Próximo </v-btn>
+          </v-col>
+        </v-row>
       </v-stepper-content>
       <v-stepper-content step="4">
         teste 4
-        <v-btn color="primary" @click="alert('Concluido')"> Concluir </v-btn>
-        <v-btn text @click="e1 = 3"> Retornar </v-btn>
+        <v-row>
+          <v-col class="d-flex justify-end">
+            <v-btn text @click="e1 = 3"> Retornar </v-btn>
+            <v-btn color="primary" @click="alert('Concluido')">
+              Concluir
+            </v-btn>
+          </v-col>
+        </v-row>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
