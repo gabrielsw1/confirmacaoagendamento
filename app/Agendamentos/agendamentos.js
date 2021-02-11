@@ -3,7 +3,7 @@ const router = express.Router()
 const db = require('../dbConnect')
 
 router.get('/consultaAgendamentos', (req, res) => {
-    (async () => {
+    (async() => {
         const client = await db.pool.connect()
         try {
             const agendamentos = await client.query(
@@ -17,7 +17,7 @@ router.get('/consultaAgendamentos', (req, res) => {
                     conv.nm_convenio AS "nmConvenio",
                     cat.nm_categoria AS "nmCategoria",
                     prest.nm_prestador AS "nmPrestador",
-                    h.nome AS "nomeHospital",
+                    h.nome AS "nmHospital",
                     l.logradouro || ', ' || h.numero AS "logradouro"
                     FROM
                         sigh.agendas ag
@@ -36,10 +36,9 @@ router.get('/consultaAgendamentos', (req, res) => {
                     LEFT JOIN endereco_sigh.logradouros l ON
                         l.id_logradouro = h.cod_logradouro
                     LEFT JOIN sigh.procedimentos proc ON
-                        proc.id_procedimento = agend.cod_procedimento
-                    WHERE
-                        agend.cod_paciente = 34262`) //nao esquecer de mudar o left do procedimento para INNER
-                    res.status(200).json(agendamentos.rows)
+                        proc.id_procedimento = agend.cod_procedimento limit 10
+                    `) //nao esquecer de mudar o left do procedimento para INNER
+            res.status(200).json(agendamentos.rows)
         } finally {
             client.release()
         }

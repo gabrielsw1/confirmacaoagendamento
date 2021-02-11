@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 import Login from '@/views/Login'
 import Main from '@/views/Main'
-import Steper from '@/components/Steper'
+import Stepper from '@/components/Stepper'
 import Perfil from '@/components/Perfil'
 import Institucional from '@/components/Institucional'
 
@@ -17,7 +17,7 @@ const routes = [{
         path: '/Main',
         component: Main,
         children: [
-            { path: '/agendamentos', component: Steper },
+            { path: '/agendamentos', component: Stepper },
             { path: '/perfil', component: Perfil },
             { path: '/institucional', component: Institucional },
         ]

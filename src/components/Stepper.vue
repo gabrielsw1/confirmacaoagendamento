@@ -24,13 +24,19 @@
           ></v-progress-circular>
         </v-overlay>
 
-        <Agendamentos :agendamentos="agendamentos"/>
-        
-        <v-btn color="primary" @click="e1 = 2"> Próximo </v-btn>
+        <Agendamentos :agendamentos="agendamentos" />
+
+        <v-btn
+          color="primary"
+          @click="e1 = 2"
+          :disabled="buscaAgendamentosSelecionados.length == 0 ? true : false"
+        >
+          Próximo
+        </v-btn>
         <v-btn text> Cancel </v-btn>
       </v-stepper-content>
       <v-stepper-content step="2">
-        <DadosAgendamentos/>
+        <ConfirmacaoAgendamento />
         <v-btn color="primary" @click="e1 = 3"> Próximo </v-btn>
 
         <v-btn text @click="e1 = 1"> Retornar </v-btn>
@@ -52,11 +58,11 @@
 <script>
 import Agendamentos from "@/components/Agendamentos";
 import DadosPessoais from "@/components/DadosPessoais";
-import DadosAgendamentos from "@/components/DadosAgendamentos";
+import ConfirmacaoAgendamento from "@/components/ConfirmacaoAgendamento";
 import { mapGetters } from "vuex";
 export default {
   name: "Tabs",
-  components: { Agendamentos, DadosPessoais, DadosAgendamentos },
+  components: { Agendamentos, DadosPessoais, ConfirmacaoAgendamento },
   mounted() {
     this.$store.dispatch("buscaAgendamentos");
   },
@@ -66,13 +72,13 @@ export default {
       loading: true,
     };
   },
-  watch:{
-    agendamentos(){
-      this.loading = false
-    }
+  watch: {
+    agendamentos() {
+      this.loading = false;
+    },
   },
   computed: {
-    ...mapGetters(["buscaDadosAgendamento"]),
+    ...mapGetters(["buscaDadosAgendamento", "buscaAgendamentosSelecionados"]),
     agendamentos() {
       return this.buscaDadosAgendamento;
     },

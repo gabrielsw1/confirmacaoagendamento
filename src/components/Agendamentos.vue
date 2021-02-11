@@ -12,11 +12,11 @@
         <v-toolbar dark dense flat color="primary" height="30%">
           <v-checkbox
             :key="item.idAgendamento"
-            :value="item"
+            :value="item.idAgendamento"
             v-model="selected"
             class="mt-5"
           ></v-checkbox>
-          {{ item.descrProcedimento }} {{ item.idAgendamento }}
+          {{ item.descrProcedimento }}
         </v-toolbar>
         <v-card-text>
           <v-row>
@@ -34,7 +34,7 @@
             </v-col>
             <v-col lg="12" md="12" sm="12" class="ma-0 pa-1">
               <span class="font-weight-bold"> Instituição: </span
-              >{{ item.nomeHospital || "Não Informado" }}
+              >{{ item.nmHospital || "Não Informado" }}
             </v-col>
             <v-col lg="12" md="12" sm="12" class="ma-0 pa-1">
               <span class="font-weight-bold"> Endereço: </span
@@ -58,7 +58,7 @@ export default {
   },
   watch: {
     selected(newValue) {
-      this.$store.agendamentosSelecionados = newValue;
+      this.$store.commit("agendamentosSelecionados", newValue);
     },
   },
 };
