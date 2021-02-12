@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-const $http = axios.create({ baseURL: 'http://192.168.232.113:8989' })
+const $http = axios.create({
+    baseURL: 'http://192.168.232.113:8989'
+})
 
 Vue.use(Vuex)
 
@@ -59,7 +61,9 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        async buscaPorCEP({ commit }, payload) {
+        async buscaPorCEP({
+            commit
+        }, payload) {
             try {
                 const response = await $http.get(`/correios/consultaCEP/${payload}`)
                 if (!response.data) {
@@ -78,7 +82,9 @@ export default new Vuex.Store({
                 console.log(e)
             }
         },
-        async buscaAgendamentos({ commit }) {
+        async buscaAgendamentos({
+            commit
+        }) {
             try {
                 const response = await $http.get(`/agendamentos/consultaAgendamentos`)
                 commit('alteraAgendamentos', response.data)

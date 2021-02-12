@@ -3,14 +3,11 @@
     <v-col>
       <v-row justify="center">
         <v-expansion-panels popout inset>
-          <v-expansion-panel
-            v-for="(item, i) in retornaAgendamentosSelecionados"
-            :key="i"
-          >
+          <v-expansion-panel v-for="(item, i) in retornaAgendamentosSelecionados" :key="i">
             <v-expansion-panel-header>
               <v-row>
                 <v-col>
-                  <span><b>Procedimento:</b>{{ item.descrProcedimento }}</span>
+                  <span><b>{{ i + 1 }} - Procedimento:</b>{{ item.descrProcedimento }}</span>
                 </v-col>
                 <v-col>
                   <span> <b>Data:</b>{{ item.dtAgendamento }}</span>
@@ -23,7 +20,7 @@
             <v-expansion-panel-content>
               <v-row>
                 <v-col lg="6" md="8" sm="12">
-                  <b>Convenio:</b> {{ item.nmConvenio || "Nao informado" }}
+                  <b>Convênio:</b> {{ item.nmConvenio || "Nao informado" }}
                 </v-col>
                 <v-col lg="6" md="8" sm="12">
                   <b>Categoria:</b> {{ item.nmCategoria || "Nao informada" }}
@@ -35,7 +32,7 @@
                   <b>Instituicao:</b> {{ item.nmHospital || "Nao informado" }}
                 </v-col>
                 <v-col lg="6" md="8" sm="12">
-                  <b>Observacoes:</b>
+                  <b>Observacões:</b>
                   {{ item.observacaoAgendamento || "Nao ha observacoes" }}
                 </v-col>
               </v-row>
@@ -48,16 +45,18 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-export default {
-  data() {
-    return {};
-  },
-  computed: {
-    ...mapGetters(["buscaAgendamentosSelecionados", "buscaAgendamentosById"]),
-    retornaAgendamentosSelecionados() {
-      return this.buscaAgendamentosById(this.buscaAgendamentosSelecionados);
+  import {
+    mapGetters
+  } from "vuex";
+  export default {
+    data() {
+      return {};
     },
-  },
-};
+    computed: {
+      ...mapGetters(["buscaAgendamentosSelecionados", "buscaAgendamentosById"]),
+      retornaAgendamentosSelecionados() {
+        return this.buscaAgendamentosById(this.buscaAgendamentosSelecionados);
+      },
+    },
+  };
 </script>

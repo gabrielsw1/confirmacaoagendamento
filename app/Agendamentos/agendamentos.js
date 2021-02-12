@@ -35,7 +35,7 @@ router.get('/consultaAgendamentos', (req, res) => {
                         h.id_hospital = ag.cod_hospital
                     LEFT JOIN endereco_sigh.logradouros l ON
                         l.id_logradouro = h.cod_logradouro
-                    LEFT JOIN sigh.procedimentos proc ON
+                    INNER JOIN sigh.procedimentos proc ON
                         proc.id_procedimento = agend.cod_procedimento limit 10
                     `) //nao esquecer de mudar o left do procedimento para INNER
             res.status(200).json(agendamentos.rows)

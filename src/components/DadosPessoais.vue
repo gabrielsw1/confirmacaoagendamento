@@ -2,87 +2,49 @@
   <v-main>
     <v-row>
       <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field
-          v-model="perfil.nome"
-          label="Nome*"
-          required
-        ></v-text-field>
+        <v-text-field dense v-model="perfil.nome" label="Nome*" required></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field v-model="perfil.sexo" label="Sexo*"></v-text-field>
+        <v-text-field v-model="perfil.sexo" label="Sexo*" dense></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field
-          cols="12"
-          v-model="perfil.dtNascimento"
-          label="Data de Nascimento*"
-        ></v-text-field>
+        <v-text-field cols="12" v-model="perfil.dtNascimento" label="Data de Nascimento*" dense></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field
-          readonly
-          :value="perfil.cpf | CPF"
-          label="CPF*"
-        ></v-text-field>
+        <v-text-field readonly :value="perfil.cpf | CPF" label="CPF*" dense></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field v-model="perfil.mae" label="Nome da Mãe"></v-text-field>
+        <v-text-field v-model="perfil.mae" label="Nome da Mãe" dense></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field v-model="perfil.pai" label="Nome do Pai"></v-text-field>
+        <v-text-field v-model="perfil.pai" label="Nome do Pai" dense></v-text-field>
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="12" lg="2" md="8" sm="12">
-        <v-text-field
-          append-icon="mdi-magnify"
-          v-model="perfil.endereco.cep"
-          label="Digite o CEP"
-          @click:append="buscaEndereco(perfil.endereco.cep)"
-        ></v-text-field>
+        <v-text-field append-icon="mdi-magnify" v-model="perfil.endereco.cep" label="Digite o CEP"
+          @click:append="buscaEndereco(perfil.endereco.cep)" dense></v-text-field>
       </v-col>
       <v-col cols="12" lg="1" md="4" sm="12">
-        <v-text-field v-model="perfil.endereco.uf" label="UF"></v-text-field>
+        <v-text-field v-model="perfil.endereco.uf" label="UF" dense></v-text-field>
       </v-col>
       <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field
-          v-model="perfil.endereco.end"
-          label="Logradouro"
-        ></v-text-field>
+        <v-text-field v-model="perfil.endereco.end" label="Logradouro" dense></v-text-field>
       </v-col>
-      <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field
-          v-model="perfil.endereco.bairro"
-          label="Bairro"
-        ></v-text-field>
+      <v-col cols="12" lg="2" md="4" sm="12">
+        <v-text-field v-model="perfil.endereco.bairro" label="Bairro" dense></v-text-field>
       </v-col>
       <v-col cols="12" lg="2" md="8" sm="12">
-        <v-text-field
-          v-model="perfil.endereco.cidade"
-          label="Cidade"
-        ></v-text-field>
+        <v-text-field v-model="perfil.endereco.cidade" label="Cidade" dense></v-text-field>
       </v-col>
       <v-col cols="12" lg="1" md="8" sm="12">
-        <v-text-field
-          v-model="perfil.endereco.numero"
-          label="Numero"
-        ></v-text-field>
+        <v-text-field v-model="perfil.endereco.numero" label="Numero" dense></v-text-field>
       </v-col>
-      <v-col cols="12" lg="4" md="8" sm="12">
-        <v-text-field
-          v-model="perfil.endereco.complemento"
-          label="Complemento"
-          placeholder="Ex.: apto 101"
-        ></v-text-field>
+      <v-col cols="12" lg="6" md="8" sm="12">
+        <v-text-field v-model="perfil.endereco.complemento" label="Complemento" placeholder="Ex.: apto 101" dense>
+        </v-text-field>
       </v-col>
     </v-row>
-    <v-alert
-      border="right"
-      type="error"
-      :value="alert"
-      max-width="40%"
-      >Nao foi possivel encontrar o CEP informado</v-alert
-    >
     <v-overlay :value="loading">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-overlay>
@@ -90,39 +52,42 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+  import {
+    mapActions,
+    mapGetters
+  } from "vuex";
 
-export default {
-  data() {
-    return {
-      loading: false,
-    };
-  },
-  computed: {
-    ...mapGetters(["buscaDadosPaciente"]),
-    perfil() {
-      return this.buscaDadosPaciente;
+  export default {
+    data() {
+      return {
+        loading: false,
+      };
     },
-    alert() {
-      if (this.buscaDadosPaciente.endereco.err) {
-        return true;
-      } else {
-        return false;
-      }
+    computed: {
+      ...mapGetters(["buscaDadosPaciente"]),
+      perfil() {
+        return this.buscaDadosPaciente;
+      },
+      alert() {
+        if (this.buscaDadosPaciente.endereco.err) {
+          return true;
+        } else {
+          return false;
+        }
+      },
     },
-  },
-  methods: {
-    ...mapActions(["buscaPorCEP"]),
-    async buscaEndereco(cep) {
-      this.loading = true;
-      await this.buscaPorCEP(cep);
-      this.loading = false;
+    methods: {
+      ...mapActions(["buscaPorCEP"]),
+      async buscaEndereco(cep) {
+        this.loading = true;
+        await this.buscaPorCEP(cep);
+        this.loading = false;
+      },
     },
-  },
-  filters: {
-    CPF(cpf) {
-      return cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    filters: {
+      CPF(cpf) {
+        return cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+      },
     },
-  },
-};
+  };
 </script>

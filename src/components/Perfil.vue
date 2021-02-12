@@ -7,12 +7,14 @@
     <v-divider />
     <DadosPessoais />
     <v-btn class="mb-4 mr-2" color="primary"> Salvar </v-btn>
-    <v-btn class="mb-4 mr-2" text > Cancelar </v-btn>
+    <v-btn class="mb-4 mr-2" text> Cancelar </v-btn>
   </v-card>
 </template>
 <script>
-import DadosPessoais from "@/components/DadosPessoais";
-export default {
-  components: { DadosPessoais },
-};
+  import DadosPessoais from "@/components/DadosPessoais";
+  export default {
+    components: {
+      DadosPessoais
+    },
+  };
 </script>
