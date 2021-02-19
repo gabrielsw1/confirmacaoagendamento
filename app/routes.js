@@ -6,6 +6,7 @@ const cors = require('cors')
 //Import das rotas 
 const Correios = require('./Correios/consultasCorreios')
 const Agendamentos = require('./Agendamentos/agendamentos')
+const MotivosCancelamentos = require('./Agendamentos/motivosCancelamentos')
 
 //Declaração de Variaveis
 const app = express()
@@ -18,7 +19,7 @@ app.use(cors())
 
 //Regras de Uso Por Rota
 app.use('/correios', Correios)
-app.use('/agendamentos', Agendamentos)
+app.use('/agendamentos', Agendamentos, MotivosCancelamentos)
 
 //Inicio do WebService
 app.listen(port, () => {

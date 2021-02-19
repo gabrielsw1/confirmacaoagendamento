@@ -11,6 +11,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         agendamentosSelecionados: [],
+        motivosCancelamentos: [],
         paciente: {
             id: 1,
             nome: "Gabriel Moreno da Luz",
@@ -47,7 +48,10 @@ export default new Vuex.Store({
                 resultado.push(...filter)
             }
             return resultado
-        }
+        },
+        retornaMotivosCancelamento(state) {
+            return state.motivosCancelamentos
+        },
     },
     mutations: {
         alteraEndereco(state, payload) {
@@ -58,6 +62,9 @@ export default new Vuex.Store({
         },
         agendamentosSelecionados(state, payload) {
             state.agendamentosSelecionados = payload
+        },
+        motivosCancelamentos(state, payload) {
+            state.motivosCancelamentos = payload
         }
     },
     actions: {
@@ -88,6 +95,16 @@ export default new Vuex.Store({
             try {
                 const response = await $http.get(`/agendamentos/consultaAgendamentos`)
                 commit('alteraAgendamentos', response.data)
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async buscaMotivosCancelamento({
+            commit
+        }) {
+            try {
+                const response = await $http.get(`/agendamentos/motivos/Cancelamentos`)
+                commit('motivosCancelamentos', response.data)
             } catch (error) {
                 console.log(error)
             }
