@@ -30,7 +30,8 @@
         <v-card-actions>
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn v-bind="attrs" v-on="on" color="error" class="mr-2" x-small fab dark @click="openDialog(item)">
+              <v-btn v-bind="attrs" v-on="on" color="error" class="mr-2" x-small fab dark
+                @click="openDialog(item.idAgendamento)">
                 <v-icon dark> mdi-calendar-remove </v-icon>
               </v-btn>
             </template>
@@ -59,7 +60,7 @@
           Tem certeza que deseja cancelar o agendamento do dia
           <b>{{ itemCancelado.dtAgendamento }}</b> as
           <b>{{ itemCancelado.hrAgendamento }}</b> ?
-          <v-select :items="retornaMotivosCancelamento" :loading="loading" v-model="motivoSelecionado"
+          <v-select :items="retornaMotivosCancelamento" :loading="loading" v-model="motivoCancelamento"
             item-text="descricaoMotivoCancelamento" item-value="idMotivoCancelamento"
             label="Selecione o motivo do cancelamento"></v-select>
         </v-card-text>
@@ -71,7 +72,7 @@
             Fechar
           </v-btn>
 
-          <v-btn color="error" text @click="dialog = false" :disabled="motivoSelecionado ? false : true">
+          <v-btn color="error" text @click="cancelarAgendamento" :disabled="motivoCancelamento ? false : true">
             Confirmar
           </v-btn>
         </v-card-actions>
@@ -92,7 +93,7 @@
     data() {
       return {
         itemCancelado: {},
-        motivoSelecionado: null,
+        motivoCancelamento: null,
         dialog: false,
         selected: [],
         loading: false,
@@ -110,15 +111,19 @@
       ...mapGetters(["retornaMotivosCancelamento"]),
     },
     methods: {
-      ...mapActions(["buscaMotivosCancelamento"]),
+      ...mapActions(["buscaMotivosCancelamento", "cancelarAtendimento"]),
       openDialog(item) {
         this.itemCancelado = item;
-        this.motivoSelecionado = null;
+        this.motivoCancelamento = null;
         this.dialog = true;
         this.loading = true;
         this.buscaMotivosCancelamento();
         this.loading = false;
       },
+      cancelarAgendamento() {
+        this.dialog = false
+        this.cancelarAtendimento({itemCancelado: this.itemCancelado, motivoCancelamento: this.motivoCancelamento})
+      }
     },
   };
 </script>

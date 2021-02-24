@@ -207,8 +207,8 @@ router.delete('/cancelar/:idHorario/:motivoCancelamento', (req, res) => {
                 .then(() => {
                     res.status(200).json("OK")
                 })
-                .catch(() => {
-                    res.status(407).json("Erro de Negócio")
+                .catch((e) => {
+                    res.status(407).json({error: e})
                 })
 
         } finally {
@@ -216,7 +216,7 @@ router.delete('/cancelar/:idHorario/:motivoCancelamento', (req, res) => {
         }
     })().catch((e) => {
         console.log(e)
-        res.status(417).json('Erro de negocio' + e)
+        res.status(417).json({error: e})
     })
 })
 

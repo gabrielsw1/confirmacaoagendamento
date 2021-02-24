@@ -10,6 +10,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        retornoCancelamento:{},
         agendamentosSelecionados: [],
         motivosCancelamentos: [],
         paciente: {
@@ -65,6 +66,9 @@ export default new Vuex.Store({
         },
         motivosCancelamentos(state, payload) {
             state.motivosCancelamentos = payload
+        },
+        alteraRetornoCancelamento(state,payload){
+            state.retornoCancelamento = payload
         }
     },
     actions: {
@@ -105,6 +109,15 @@ export default new Vuex.Store({
             try {
                 const response = await $http.get(`/agendamentos/motivos/Cancelamentos`)
                 commit('motivosCancelamentos', response.data)
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async cancelarAtendimento({commit},payload){
+            try {
+                const response = await $http.delete(`/agendamentos/cancelar/${payload.itemCancelado}/${payload.motivoCancelamento}`)
+                console.log(response.data)
+                commit('alteraRetornoCancelamento', response.data)
             } catch (error) {
                 console.log(error)
             }
